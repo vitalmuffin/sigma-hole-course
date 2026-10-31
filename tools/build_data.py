@@ -88,6 +88,13 @@ def main():
                 scan(x, f"{w}.limits")
             for t, b in l.get("deeper", []):
                 scan(b, f"{w}.deeper")
+            for fm in l.get("formulas", []):      # every displayed formula must cite a located claim
+                if not fm.get("src"):
+                    errors.append(f"{w}: formula without src: {fm['tex'][:40]}")
+                for cid in fm.get("src", []):
+                    used_claims.add(cid)
+                    if cid not in claims:
+                        errors.append(f"{w}.formula: unknown claim {cid}")
             for q in l.get("checks", []):
                 if not 0 <= q["correct"] < len(q["choices"]):
                     errors.append(f"{w}: quiz answer index out of range")

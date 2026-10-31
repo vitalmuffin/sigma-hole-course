@@ -283,4 +283,30 @@ CLAIMS = [
          text="The bootstrap estimates uncertainty by refitting on resampled data."),
     dict(id="kennard-stone", src="Kennard1969", type="paraphrase", rx=r"covers the experimental region uniformly",
          text="Kennard–Stone selects a training set that covers descriptor space uniformly."),
+    # ---------- formula sources (each displayed formula cites at least one claim) ----------
+    dict(id="stone-scaling", src="Stone2013", type="number", rx=r"scales roughly as the 5th power of the size N",
+         text="The cost of correlated wavefunction methods grows as a power of system size N: about N⁵ for MP2, "
+              "N⁶ for MP3 and N⁷ for MP4."),
+    dict(id="buckingham-multipole", src="Buckingham1959", type="definition", rx=r"expanded in powers of",
+         text="Far from a charge distribution its potential expands in powers of 1/R: the charge over R, a dipole "
+              "term in cos θ/R², and a quadrupole term with the angular factor (3cos²θ − 1)/2 over R³."),
+    dict(id="kolar-ccsdt", src="Kolar2016", type="paraphrase",
+         rx=r"iterative inclusion of the single and double excitations with noniterative, perturbative inclusion of triple",
+         text="CCSD(T) treats single and double excitations iteratively and adds triple excitations non-iteratively "
+              "by perturbation theory."),
+    dict(id="kolar-cbs", src="Kolar2016", type="paraphrase", rx=r"L is the cardinal number of the basis set",
+         text="CCSD(T)/CBS limits are extrapolated from two basis sets of cardinal numbers L−1 and L with an "
+              "inverse-power law; α = 3 for the SCF-type and triplet-pair parts (the X⁻³ form)."),
+    dict(id="stone-deformation", src="Stone2013", type="definition", rx=r"is called the deformation energy",
+         text="The energy of a molecule in its distorted (complex) geometry minus its energy at equilibrium is the "
+              "deformation energy."),
+    dict(id="chai-partition", src="Chai2008", type="paraphrase", rx=r"partition of unity, using erf",
+         text="Long-range corrected hybrids split 1/r with a partition of unity: erf(ωr)/r for long range (HF "
+              "exchange) and erfc(ωr)/r for short range (a DFT exchange functional), ω setting the split."),
+    dict(id="stone-amber-form", src="Stone2013", type="paraphrase", rx=r"This is the form of the classical AMBER",
+         text="The classical AMBER energy is a sum of harmonic bond and angle terms, a cosine series for torsions, "
+              "and pairwise 12-6 plus Coulomb non-bonded terms."),
+    dict(id="boothroyd-weights", src="Boothroyd2023", type="paraphrase", rx=r"used a Boltzmann distribution with T = 2000 K",
+         text="Sage weights torsion-profile points by their QM energy above the minimum so that low-energy regions "
+              "count more, following an earlier study that used Boltzmann weights (kT ≈ 4 kcal/mol)."),
 ]

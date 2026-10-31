@@ -3,7 +3,7 @@ window.ICF_COURSE_DATA = {
  "schemaVersion": "1.0",
  "id": "sigma-hole-course",
  "title": "The σ-Hole and Its Models",
- "builtAt": "2026-10-31T17:20:04+00:00",
+ "builtAt": "2026-10-31T18:59:46+00:00",
  "stages": [
   {
    "id": "s0",
@@ -19,6 +19,9 @@ window.ICF_COURSE_DATA = {
      "idea": "The charge around a bonded halogen is not spherical. The rest of this course follows that one fact through three levels of theory, each fitted to or checked against the one above it:\n\n- **Wavefunction reference**: CCSD(T) at the complete-basis-set limit. Accurate, but its cost grows roughly as $N^7$ with system size, so it is used for small benchmark complexes.\n- **Density functional theory**: cost roughly $N^3$–$N^4$; accuracy depends on the functional, and halogen bonds are a known stress test for it.\n- **Force fields**: classical pair terms, cost roughly $N^2$ (or $N \\log N$ with Ewald sums); their parameters must be fitted to data from the levels above or to experiment.\n\nEvery stage asks the same three things: what does the method assume, what is it grounded in, and where does it fail for halogen bonds?",
      "formulas": [
       {
+       "src": [
+        "stone-scaling"
+       ],
        "tex": "\\frac{t(N)}{t(N_0)} = \\left(\\frac{N}{N_0}\\right)^{p}",
        "symbols": [
         [
@@ -83,6 +86,10 @@ window.ICF_COURSE_DATA = {
      "idea": "In R–X the halogen's valence p orbital along the bond is half used for the σ bond. Electron density is pulled into the bonding region and the belt, leaving the outer pole depleted: the **σ-hole**. The ESP is the energy of a +1 test charge; it is a physical observable, unlike an atomic charge {{murray-observable}}. The usual descriptor is $V_{S,\\max}$, the maximum of the ESP on the 0.001 a.u. density isosurface.\n\nA minimal model already captures the effect: a net charge $q$ plus an axial quadrupole $\\Theta$ on X. The quadrupole adds to the potential along the axis and subtracts from it in the belt.",
      "formulas": [
       {
+       "src": [
+        "buckingham-multipole",
+        "clark-sigmahole"
+       ],
        "tex": "V(\\theta) = \\frac{q}{r} + \\frac{\\Theta}{r^{3}}\\,\\frac{3\\cos^{2}\\theta - 1}{2}",
        "symbols": [
         [
@@ -198,6 +205,9 @@ window.ICF_COURSE_DATA = {
      "idea": "The σ-hole concept generalises: one hole roughly opposite each covalent bond. Directionality is then a property of the donor's geometry, not a universal 180° rule.\n\nCrystal databases are the main experimental evidence for directionality. The Cambridge Structural Database passed 800 000 entries in 2015 {{groom-csd}}; one survey of more than 22 000 contacts found fewer than 2 % bifurcated, with iodine over-represented {{michalczyk-csd}}.\n\nTwo cautions apply when reading such statistics. First, angle histograms must be **cone-corrected**: the solid angle near 180° is small, so even random contacts would rarely appear there {{mooibroek-cone}}. Second, a crystal contact is the result of all packing forces at once, not of the halogen bond alone.",
      "formulas": [
       {
+       "src": [
+        "mooibroek-cone"
+       ],
        "tex": "P_{\\text{random}}(\\theta)\\,\\mathrm{d}\\theta \\propto \\sin\\theta\\,\\mathrm{d}\\theta",
        "symbols": [
         [
@@ -257,6 +267,11 @@ window.ICF_COURSE_DATA = {
      "idea": "Intermolecular energies are usually split into long-range terms, **electrostatics**, **induction** (polarisation) and **dispersion** {{stone-longrange}}, and short-range terms that appear when densities overlap: **exchange–repulsion**, **charge transfer** and **penetration** {{stone-shortrange}}. Symmetry-adapted perturbation theory (SAPT) computes such terms directly.\n\nSAPT on halogen-bonded complexes shows two regimes: in weak complexes (1–6 kcal/mol) dispersion is usually the largest attractive term; in strong ones electrostatics and induction dominate {{kolar-sapt}}.",
      "formulas": [
       {
+       "src": [
+        "bornmayer",
+        "stone-longrange",
+        "tt-damp"
+       ],
        "tex": "E(r) = A\\,e^{-br} \\;-\\; \\frac{332.06\\,q_{\\text{eff}}}{r} \\;-\\; f_6(br)\\,\\frac{C_6}{r^{6}}",
        "symbols": [
         [
@@ -405,6 +420,9 @@ window.ICF_COURSE_DATA = {
      "idea": "Coupled-cluster theory writes the wavefunction as $e^{\\hat T}\\Phi_{\\text{HF}}$. CCSD includes all single and double excitations in this exponential form; (T) adds connected triples by perturbation theory. The result is size-consistent and part of a systematically improvable hierarchy; for closed-shell non-covalent complexes it is the accepted reference level.\n\nThe second ingredient is the **basis set**. Correlation energy converges slowly with basis size, so results are extrapolated to the complete-basis-set (CBS) limit. Benchmarks for halogen bonds therefore quote 'CCSD(T)/CBS' {{rezac-x40}} {{kriz-sh250}}. Kozuch and Martin found that only heavily correlated methods (CCSD(T)) or parametrised MP2 variants reach high accuracy, and that heavy basis sets and relativistic ECPs are needed {{kozuch-disp}}.",
      "formulas": [
       {
+       "src": [
+        "kolar-ccsdt"
+       ],
        "tex": "|\\Psi_{\\text{CC}}\\rangle = e^{\\hat T_1 + \\hat T_2}\\,|\\Phi_{\\text{HF}}\\rangle,\\qquad E_{\\text{CCSD(T)}} = E_{\\text{CCSD}} + E_{(T)}",
        "symbols": [
         [
@@ -457,6 +475,9 @@ window.ICF_COURSE_DATA = {
      "idea": "**Families.** Correlation-consistent cc-pVXZ sets add shells in a fixed pattern so that energies converge smoothly; cc-pVXZ-PP versions pair them with pseudopotentials for heavy elements {{peterson-pp}}. Karlsruhe def2 sets cover H–Rn with ECPs beyond Kr {{weigend-def2}}. Diffuse functions ('aug-', 'def2-…D') are needed for anions and polarisabilities {{rappoport-diffuse}}.\n\n**CBS extrapolation.** If $E(X) = E_{\\text{CBS}} + A X^{-3}$, two calculations with X and Y fix both unknowns.\n\n**Counterpoise.** Compute each monomer in the full dimer basis (ghost functions on the partner) {{boys-cp}}. For DFT, CP-corrected energies are less sensitive to diffuse functions and CP does not over-correct {{gray-cp}}; for intermediate basis sets the average of CP and non-CP ('half-half') can work best {{brauer-halfcp}}.",
      "formulas": [
       {
+       "src": [
+        "kolar-cbs"
+       ],
        "tex": "E_{\\text{CBS}} = \\frac{Y^{3}E_{Y} - X^{3}E_{X}}{Y^{3} - X^{3}}",
        "symbols": [
         [
@@ -474,6 +495,9 @@ window.ICF_COURSE_DATA = {
        ]
       },
       {
+       "src": [
+        "boys-cp"
+       ],
        "tex": "\\Delta E^{\\text{CP}} = E_{AB}^{AB} - E_{A}^{AB} - E_{B}^{AB}",
        "symbols": [
         [
@@ -530,6 +554,9 @@ window.ICF_COURSE_DATA = {
      "idea": "- **X40** (Řezáč et al. 2012): 40 complexes, CCSD(T)/CBS, plus 10-point dissociation curves {{rezac-x40}}.\n- **XB18/XB51** (Kozuch & Martin 2013): geometries and dissociation energies {{kozuch-sets}}.\n- **SH250×10** (Kříž & Řezáč 2022): 250 σ-hole complexes of Cl, Br, I, S, Se, P and As with 10-point CCSD(T)/CBS curves {{kriz-sh250}}.\n- **GMTKN55** (Goerigk et al.): general main-group chemistry, contains halogen-bond subsets {{goerigk-gmtkn55}}.\n\nKnow what a benchmark reports. **Interaction energy** $E_{\\text{int}}$ uses monomers frozen at the complex geometry; **binding energy** $E_{\\text{bind}}$ uses relaxed monomers and so includes deformation. Dissociation curves ('×10') test the shape away from the minimum, which matters for force fields.",
      "formulas": [
       {
+       "src": [
+        "stone-deformation"
+       ],
        "tex": "E_{\\text{bind}} = E_{\\text{int}} + \\sum_{M} \\left(E_{M}^{\\text{complex geom}} - E_{M}^{\\text{opt}}\\right)",
        "symbols": [
         [
@@ -585,6 +612,10 @@ window.ICF_COURSE_DATA = {
      "idea": "**Hohenberg–Kohn**: the external potential, and hence everything about the ground state, is a unique functional of the electron density {{hk-theorem}}. **Kohn–Sham**: replace the interacting electrons by non-interacting ones in an effective potential that reproduces the same density; the kinetic energy of these orbitals is computed exactly and all remaining many-body effects go into the exchange–correlation functional $E_{xc}[\\rho]$ {{ks-equations}}.\n\nThe exact $E_{xc}$ is unknown. Approximations are ordered on **Jacob's ladder** by their ingredients {{perdew-ladder}}:\n\n- LDA: the local density $\\rho$;\n- GGA: adds the gradient $\\nabla\\rho$ (PBE, BLYP; LYP correlation from Lee, Yang and Parr);\n- meta-GGA: adds the kinetic-energy density $\\tau$;\n- hybrids: add a fraction of exact (HF) exchange (B3LYP, PBE0, M06-2X) {{becke-hybrid}} {{zhao-m06}};\n- double hybrids: add MP2-like correlation from unoccupied orbitals (revDSD-PBEP86).\n\nFunctionals are grounded either in **exact constraints** (PBE, SCAN) or in **fits to reference data** (B3LYP's three parameters, M06-2X's dozens, ωB97X-D's fitted series).",
      "formulas": [
       {
+       "src": [
+        "ks-equations",
+        "hk-theorem"
+       ],
        "tex": "E[\\rho] = T_s[\\rho] + \\int v_{\\text{ext}}\\rho\\,\\mathrm{d}\\mathbf r + J[\\rho] + E_{xc}[\\rho]",
        "symbols": [
         [
@@ -641,6 +672,10 @@ window.ICF_COURSE_DATA = {
      "idea": "Exact exchange is free of self-interaction and counters delocalisation, but 100 % of it everywhere ruins other properties. **Range-separated hybrids** split the Coulomb operator: short range is treated mostly with the DFA, long range with exact exchange. In ωB97X-D the split parameter is ω = 0.2 bohr⁻¹ {{chai-omega}}, with a short-range exact-exchange fraction of 0.222 {{chai-cx}}.\n\nOn the SH250×10 benchmark the double hybrid revDSD-PBEP86 is the most accurate {{kriz-best}}; M06-2X and most range-separated hybrids slightly **under**-bind {{kriz-under}}, whereas low-rung functionals strongly over-bind complexes in which charge transfer is large {{kriz-ct-cl2}}.",
      "formulas": [
       {
+       "src": [
+        "chai-partition",
+        "chai-omega"
+       ],
        "tex": "\\frac{1}{r} = \\underbrace{\\frac{\\operatorname{erfc}(\\omega r)}{r}}_{\\text{short range}} + \\underbrace{\\frac{\\operatorname{erf}(\\omega r)}{r}}_{\\text{long range}}",
        "symbols": [
         [
@@ -693,6 +728,10 @@ window.ICF_COURSE_DATA = {
      "idea": "All DFT-D schemes add damped pairwise terms:\n\n- **D2**: empirical atomic C6 and a global scaling $s_6$ {{grimme-d2}};\n- **D3**: C6 depends on the coordination number; C8 and an optional three-body term {{grimme-d3}}; two damping choices: **zero damping** switches the correction off at short range {{grimme-zero}}, **BJ damping** lets it approach a finite value {{grimme-bj}} {{grimme-bj-form}};\n- **D4**: C6 also depends on atomic partial charges {{caldeweyher-d4}};\n- **TS**: C6 from the self-consistent density via Hirshfeld volumes {{ts-vdw}};\n- ωB97X-D: its own Chai–Head-Gordon damping, fitted with the functional {{chai-damp}}.\n\nFor halogen bonds, Kozuch and Martin found that dispersion corrections tend to be detrimental, because the functionals that over-bind already over-bind without them {{kozuch-disp}}; with half-and-half functionals that minimise delocalisation error, dispersion corrections work well {{otero-delocal}}.",
      "formulas": [
       {
+       "src": [
+        "grimme-bj-form",
+        "grimme-zero"
+       ],
        "tex": "E^{\\text{BJ}}_{6} = -\\frac{C_6}{r^{6} + (a_1 R_0 + a_2)^{6}}, \\qquad E^{\\text{zero}}_{6} = -\\frac{C_6}{r^{6}}\\,\\frac{1}{1 + 6\\,(r/s_r R_0)^{-\\alpha}}",
        "symbols": [
         [
@@ -757,6 +796,9 @@ window.ICF_COURSE_DATA = {
      "idea": "- **Mulliken**: split each overlap population equally between the two atoms {{mulliken-pop}}; strongly basis dependent.\n- **NBO/NPA**: charges from natural atomic orbitals; NBO also gives donor–acceptor energies such as $n(Y) \\to \\sigma^*(C\\text{–}X)$ {{reed-nbo}}.\n- **Hirshfeld**: share the density at each point in proportion to free-atom densities {{hirshfeld-stock}}; **CM5** rescales Hirshfeld charges to reproduce dipole moments {{marenich-cm5}}.\n- **MBIS**: iterative stockholder partitioning with Slater-type atomic densities, also yields atomic multipoles {{mbis}}.\n- **ESP-fitted** (RESP): charges chosen to reproduce the ESP outside the molecule, the classic choice for force fields {{cornell-amber}}.\n\nNone of these spherical charges can show a σ-hole. For force fields this is the central problem of the next stage.",
      "formulas": [
       {
+       "src": [
+        "hirshfeld-stock"
+       ],
        "tex": "q_A = Z_A - \\int w_A(\\mathbf r)\\,\\rho(\\mathbf r)\\,\\mathrm d\\mathbf r, \\qquad w_A^{\\text{Hirsh}} = \\frac{\\rho_A^{0}(\\mathbf r)}{\\sum_B \\rho_B^{0}(\\mathbf r)}",
        "symbols": [
         [
@@ -809,6 +851,10 @@ window.ICF_COURSE_DATA = {
      "idea": "Their best descriptor combines σ-hole depth and the σ*(C–I) orbital energy {{engelage-coef}}. Binding energies follow from W through **one fitted line per acceptor** {{engelage-eq}}. Cationic donors needed re-optimised coefficients and still formed a separate trend line with ammonia {{engelage-cationic}}.\n\nSo W is a property of the donor; the acceptor enters only through which line is used. Predicting binding to a new acceptor needs descriptors of **both** partners. That is the step this thesis takes.\n\nCheaper donor descriptors exist too: VmaxPred estimates σ-hole magnitudes from substituent increments {{heidrich-vmaxpred}}; %V_bur measures steric shielding {{falivene-vbur}}.",
      "formulas": [
       {
+       "src": [
+        "engelage-coef",
+        "engelage-eq"
+       ],
        "tex": "W = a\\,E_{\\sigma\\text{-hole}} + b\\,E_{\\sigma^*}, \\qquad E_{\\text{Cl}^-} = -182.45\\,W - 8.5, \\qquad E_{\\text{NH}_3} = -38.84\\,W - 7.61",
        "symbols": [
         [
@@ -872,6 +918,10 @@ window.ICF_COURSE_DATA = {
      "idea": "Common choices, written with the same well depth ε and minimum position $r_m$:\n\n- **LJ 12-6**: two parameters, cheap, too hard inside the minimum;\n- **Buckingham exp-6**: exponential repulsion {{buckingham}}; needs care because it turns over at very short r;\n- **Morse**: a bond-like well with finite depth {{morse}}, sometimes used for directional contacts;\n- **double exponential**: two exponentials with global α, β; used by Horton et al. in an OpenFF-style force field (α ≈ 16.77, β ≈ 4.43 after refitting) {{horton-de}};\n- **Tang–Toennies**: Born–Mayer repulsion plus damped dispersion series {{tt-damp}}.",
      "formulas": [
       {
+       "src": [
+        "lj-1924",
+        "horton-de"
+       ],
        "tex": "E_{\\text{LJ}} = \\varepsilon\\left[\\left(\\tfrac{r_m}{r}\\right)^{12} - 2\\left(\\tfrac{r_m}{r}\\right)^{6}\\right], \\qquad E_{\\text{DE}} = \\varepsilon\\left[\\tfrac{\\beta e^{\\alpha}}{\\alpha-\\beta}e^{-\\alpha r/r_m} - \\tfrac{\\alpha e^{\\beta}}{\\alpha-\\beta}e^{-\\beta r/r_m}\\right]",
        "symbols": [
         [
@@ -925,6 +975,10 @@ window.ICF_COURSE_DATA = {
      "idea": "Fixes, from cheapest to most physical:\n\n- **Off-centre positive site** (extra point, 'explicit σ-hole'): a massless charge on the R–X axis beyond the halogen, with the halogen charge adjusted to keep the total {{ibrahim-vs}} {{kolar-vs}} {{jorgensen-xb}} {{soteras-vs}}. Directionality now arises from electrostatics.\n- **Atomic multipoles** (AMOEBA): the quadrupole carries the σ-hole directly {{amoeba}}.\n- **Polarisation**: induced dipoles with Thole damping {{thole}} let the σ-hole respond to the partner.\n- **Charge penetration**: point multipoles miss the extra attraction when densities overlap {{wang-cp}}; damped-charge models add it {{rackers-cp}}.",
      "formulas": [
       {
+       "src": [
+        "ibrahim-vs",
+        "kolar-vs"
+       ],
        "tex": "E_{\\text{elst}}(\\theta) = 332.06\\,q_A\\left[\\frac{q_X - q_V}{d} + \\frac{q_V}{\\lvert \\mathbf d - \\mathbf d_V\\rvert}\\right]",
        "symbols": [
         [
@@ -1001,6 +1055,10 @@ window.ICF_COURSE_DATA = {
      "idea": "- **AMBER** (Cornell 1995): RESP charges from the 6-31G* ESP {{cornell-amber}}; **GAFF** extends it to general organic molecules {{gaff}}.\n- **CHARMM22**: charges and interaction parameters fitted to ab initio interactions with water {{charmm}}.\n- **OPLS-AA**: non-bonded parameters fitted to liquid properties {{opls}}; OPLS added a halogen X-site {{jorgensen-xb}}.\n- **MMFF94**: largely ab initio data {{mmff}}.\n- **OpenFF (SMIRNOFF)**: parameters assigned by SMIRKS patterns instead of atom types {{smirnoff}}; Sage refitted LJ to liquid densities and enthalpies of mixing {{boothroyd-sage}}.\n\nEngines such as OpenMM accept custom functional forms, which makes non-standard halogen-bond terms practical {{openmm8}}. A broad historical review: Dauber-Osguthorpe & Hagler {{dauber-review}}.",
      "formulas": [
       {
+       "src": [
+        "stone-amber-form",
+        "cornell-amber"
+       ],
        "tex": "E = \\sum_{\\text{bonds}} k_b(b-b_0)^2 + \\sum_{\\text{angles}} k_\\theta(\\theta-\\theta_0)^2 + \\sum_{\\text{torsions}} \\sum_n k_n[1+\\cos(n\\phi-\\delta_n)] + \\sum_{i<j}\\left[E_{\\text{vdW}}(r_{ij}) + \\frac{332.06\\,q_iq_j}{r_{ij}}\\right]",
        "symbols": [
         [
@@ -1068,6 +1126,10 @@ window.ICF_COURSE_DATA = {
      "idea": "A layered strategy assigns each parameter group to the data that determine it best:\n\n- **Bonded terms** ← QM geometries, Hessians and torsion scans of monomers;\n- **Charges** ← the monomer ESP (RESP) or AM1-BCC {{jakalian-am1bcc}}; multipoles/polarisabilities ← monomer multipoles and polarisability tensors {{thole}};\n- **LJ / repulsion** ← liquid densities and heats of vaporisation or mixing {{opls}} {{boothroyd-sage}};\n- **Halogen-bond terms** (site charge and distance, pair corrections) ← QM interaction scans of complexes {{kolar-vs}} {{ibrahim-vs}}.\n\nTools like ForceBalance optimise many targets at once with explicit weights and regularisation {{forcebalance}}. Weights decide which part of a curve is matched.",
      "formulas": [
       {
+       "src": [
+        "forcebalance",
+        "boothroyd-weights"
+       ],
        "tex": "L(\\boldsymbol\\theta) = \\frac{\\sum_i w_i\\,[E_{\\text{FF}}(r_i;\\boldsymbol\\theta) - E_{\\text{ref}}(r_i)]^2}{\\sum_i w_i}, \\qquad w_i = e^{-(E_{\\text{ref},i} - E_{\\min})/kT_w}",
        "symbols": [
         [
@@ -1121,6 +1183,9 @@ window.ICF_COURSE_DATA = {
      "idea": "- **Ridge** adds $\\lambda\\lVert\\boldsymbol\\beta\\rVert^2$: biased, but stable coefficients {{ridge}}.\n- **Lasso** penalises $\\lVert\\boldsymbol\\beta\\rVert_1$ and sets some coefficients to exactly zero {{lasso}}.\n- **Information criteria**: AIC $= 2k - 2\\ln L$ {{aic}}; BIC penalises parameters more for large n {{bic}}.\n- **Validation**: hold out data; choose the training set to cover descriptor space (Kennard–Stone) {{kennard-stone}}; estimate uncertainty by bootstrap resampling {{bootstrap}}.\n\nReport errors as RMSE and mean |Δ| on held-out data, not as a signed mean that lets errors cancel.",
      "formulas": [
       {
+       "src": [
+        "ridge"
+       ],
        "tex": "\\hat{\\boldsymbol\\beta}_{\\text{ridge}} = \\left(\\mathbf X^{\\top}\\mathbf X + \\lambda\\mathbf I\\right)^{-1}\\mathbf X^{\\top}\\mathbf y",
        "symbols": [
         [
@@ -1895,6 +1960,54 @@ window.ICF_COURSE_DATA = {
    "type": "paraphrase",
    "text": "Kennard–Stone selects a training set that covers descriptor space uniformly.",
    "page": "2"
+  },
+  "stone-scaling": {
+   "src": "Stone2013",
+   "type": "number",
+   "text": "The cost of correlated wavefunction methods grows as a power of system size N: about N⁵ for MP2, N⁶ for MP3 and N⁷ for MP4.",
+   "page": "ch. 5, p. 4"
+  },
+  "buckingham-multipole": {
+   "src": "Buckingham1959",
+   "type": "definition",
+   "text": "Far from a charge distribution its potential expands in powers of 1/R: the charge over R, a dipole term in cos θ/R², and a quadrupole term with the angular factor (3cos²θ − 1)/2 over R³.",
+   "page": "2"
+  },
+  "kolar-ccsdt": {
+   "src": "Kolar2016",
+   "type": "paraphrase",
+   "text": "CCSD(T) treats single and double excitations iteratively and adds triple excitations non-iteratively by perturbation theory.",
+   "page": "13"
+  },
+  "kolar-cbs": {
+   "src": "Kolar2016",
+   "type": "paraphrase",
+   "text": "CCSD(T)/CBS limits are extrapolated from two basis sets of cardinal numbers L−1 and L with an inverse-power law; α = 3 for the SCF-type and triplet-pair parts (the X⁻³ form).",
+   "page": "16"
+  },
+  "stone-deformation": {
+   "src": "Stone2013",
+   "type": "definition",
+   "text": "The energy of a molecule in its distorted (complex) geometry minus its energy at equilibrium is the deformation energy.",
+   "page": "ch. 1, p. 4"
+  },
+  "chai-partition": {
+   "src": "Chai2008",
+   "type": "paraphrase",
+   "text": "Long-range corrected hybrids split 1/r with a partition of unity: erf(ωr)/r for long range (HF exchange) and erfc(ωr)/r for short range (a DFT exchange functional), ω setting the split.",
+   "page": "1"
+  },
+  "stone-amber-form": {
+   "src": "Stone2013",
+   "type": "paraphrase",
+   "text": "The classical AMBER energy is a sum of harmonic bond and angle terms, a cosine series for torsions, and pairwise 12-6 plus Coulomb non-bonded terms.",
+   "page": "ch. 12, p. 17"
+  },
+  "boothroyd-weights": {
+   "src": "Boothroyd2023",
+   "type": "paraphrase",
+   "text": "Sage weights torsion-profile points by their QM energy above the minimum so that low-energy regions count more, following an earlier study that used Boltzmann weights (kT ≈ 4 kcal/mol).",
+   "page": "8"
   }
  },
  "sources": {
@@ -1987,6 +2100,15 @@ window.ICF_COURSE_DATA = {
    "venue": "Proceedings of the Royal Society of London. Series A. Mathematical and Physical Sciences",
    "doi": "10.1098/rspa.1938.0173",
    "pdf": "sources/raw/Buckingham1938_10.1098_rspa.1938.0173.pdf"
+  },
+  "Buckingham1959": {
+   "id": "Buckingham1959",
+   "authors": "Buckingham",
+   "year": "1959",
+   "title": "Molecular quadrupole moments",
+   "venue": "Quarterly Reviews, Chemical Society",
+   "doi": "10.1039/qr9591300183",
+   "pdf": "sources/raw/Buckingham1959_10.1039_qr9591300183.pdf"
   },
   "Caldeweyher2019": {
    "id": "Caldeweyher2019",
@@ -2618,15 +2740,6 @@ window.ICF_COURSE_DATA = {
    "doi": "10.1016/j.bmc.2016.06.034",
    "pdf": "sources/raw/SoterasGutierrez2016_10.1016_j.bmc.2016.06.034.pdf"
   },
-  "Stone2013JACS": {
-   "id": "Stone2013JACS",
-   "authors": "Stone",
-   "year": "2013",
-   "title": "Are Halogen Bonded Structures Electrostatically Driven?",
-   "venue": "Journal of the American Chemical Society",
-   "doi": "10.1021/ja401420w",
-   "pdf": "sources/raw/Stone2013JACS_10.1021_ja401420w.pdf"
-  },
   "Stone2013": {
    "id": "Stone2013",
    "authors": "Stone",
@@ -2635,6 +2748,15 @@ window.ICF_COURSE_DATA = {
    "venue": "Oxford University Press",
    "doi": "10.1093/acprof:oso/9780199672394.001.0001",
    "pdf": "sources/raw/Stone2013_book/"
+  },
+  "Stone2013JACS": {
+   "id": "Stone2013JACS",
+   "authors": "Stone",
+   "year": "2013",
+   "title": "Are Halogen Bonded Structures Electrostatically Driven?",
+   "venue": "Journal of the American Chemical Society",
+   "doi": "10.1021/ja401420w",
+   "pdf": "sources/raw/Stone2013JACS_10.1021_ja401420w.pdf"
   },
   "Thirman2018": {
    "id": "Thirman2018",

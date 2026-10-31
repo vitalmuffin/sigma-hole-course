@@ -22,7 +22,7 @@ STAGES_B = [
                  "- double hybrids: add MP2-like correlation from unoccupied orbitals (revDSD-PBEP86).\n\n"
                  "Functionals are grounded either in **exact constraints** (PBE, SCAN) or in **fits to reference data** "
                  "(B3LYP's three parameters, M06-2X's dozens, ωB97X-D's fitted series).",
-            formulas=[dict(tex=r"E[\rho] = T_s[\rho] + \int v_{\text{ext}}\rho\,\mathrm{d}\mathbf r + J[\rho] + E_{xc}[\rho]",
+            formulas=[dict(src=['ks-equations', 'hk-theorem'], tex=r"E[\rho] = T_s[\rho] + \int v_{\text{ext}}\rho\,\mathrm{d}\mathbf r + J[\rho] + E_{xc}[\rho]",
                            symbols=[("T_s", "kinetic energy of the non-interacting Kohn–Sham electrons"),
                                     ("v_{\\text{ext}}", "potential of the nuclei"),
                                     ("J", "classical Coulomb repulsion of the density with itself"),
@@ -53,7 +53,7 @@ STAGES_B = [
                  "On the SH250×10 benchmark the double hybrid revDSD-PBEP86 is the most accurate {{kriz-best}}; "
                  "M06-2X and most range-separated hybrids slightly **under**-bind {{kriz-under}}, whereas low-rung "
                  "functionals strongly over-bind complexes in which charge transfer is large {{kriz-ct-cl2}}.",
-            formulas=[dict(tex=r"\frac{1}{r} = \underbrace{\frac{\operatorname{erfc}(\omega r)}{r}}_{\text{short range}} + \underbrace{\frac{\operatorname{erf}(\omega r)}{r}}_{\text{long range}}",
+            formulas=[dict(src=['chai-partition', 'chai-omega'], tex=r"\frac{1}{r} = \underbrace{\frac{\operatorname{erfc}(\omega r)}{r}}_{\text{short range}} + \underbrace{\frac{\operatorname{erf}(\omega r)}{r}}_{\text{long range}}",
                            symbols=[("r", "electron–electron distance (bohr)"),
                                     ("\\omega", "range-separation parameter (bohr⁻¹); 1/ω is the crossover length"),
                                     ("\\operatorname{erf},\\;\\operatorname{erfc}", "error function and its complement, erf + erfc = 1")])],
@@ -93,7 +93,7 @@ STAGES_B = [
                  "because the functionals that over-bind already over-bind without them {{kozuch-disp}}; with "
                  "half-and-half functionals that minimise delocalisation error, dispersion corrections work well "
                  "{{otero-delocal}}.",
-            formulas=[dict(tex=r"E^{\text{BJ}}_{6} = -\frac{C_6}{r^{6} + (a_1 R_0 + a_2)^{6}}, \qquad E^{\text{zero}}_{6} = -\frac{C_6}{r^{6}}\,\frac{1}{1 + 6\,(r/s_r R_0)^{-\alpha}}",
+            formulas=[dict(src=['grimme-bj-form', 'grimme-zero'], tex=r"E^{\text{BJ}}_{6} = -\frac{C_6}{r^{6} + (a_1 R_0 + a_2)^{6}}, \qquad E^{\text{zero}}_{6} = -\frac{C_6}{r^{6}}\,\frac{1}{1 + 6\,(r/s_r R_0)^{-\alpha}}",
                            symbols=[("C_6", "pair dispersion coefficient (kcal/mol·Å⁶)"),
                                     ("R_0", "pair cutoff radius (Å)"),
                                     ("a_1,\\;a_2", "BJ parameters fitted per functional (a2 in Å)"),
@@ -134,7 +134,7 @@ STAGES_B = [
                  "force fields {{cornell-amber}}.\n\n"
                  "None of these spherical charges can show a σ-hole. For force fields this is the central problem of the "
                  "next stage.",
-            formulas=[dict(tex=r"q_A = Z_A - \int w_A(\mathbf r)\,\rho(\mathbf r)\,\mathrm d\mathbf r, \qquad w_A^{\text{Hirsh}} = \frac{\rho_A^{0}(\mathbf r)}{\sum_B \rho_B^{0}(\mathbf r)}",
+            formulas=[dict(src=['hirshfeld-stock'], tex=r"q_A = Z_A - \int w_A(\mathbf r)\,\rho(\mathbf r)\,\mathrm d\mathbf r, \qquad w_A^{\text{Hirsh}} = \frac{\rho_A^{0}(\mathbf r)}{\sum_B \rho_B^{0}(\mathbf r)}",
                            symbols=[("Z_A", "nuclear charge of atom A"),
                                     ("w_A", "weight function that assigns density at r to atom A"),
                                     ("\\rho_A^0", "spherical free-atom density of A (the promolecule reference)")])],
@@ -167,7 +167,7 @@ STAGES_B = [
                  "binding to a new acceptor needs descriptors of **both** partners. That is the step this thesis takes.\n\n"
                  "Cheaper donor descriptors exist too: VmaxPred estimates σ-hole magnitudes from substituent increments "
                  "{{heidrich-vmaxpred}}; %V_bur measures steric shielding {{falivene-vbur}}.",
-            formulas=[dict(tex=r"W = a\,E_{\sigma\text{-hole}} + b\,E_{\sigma^*}, \qquad E_{\text{Cl}^-} = -182.45\,W - 8.5, \qquad E_{\text{NH}_3} = -38.84\,W - 7.61",
+            formulas=[dict(src=['engelage-coef', 'engelage-eq'], tex=r"W = a\,E_{\sigma\text{-hole}} + b\,E_{\sigma^*}, \qquad E_{\text{Cl}^-} = -182.45\,W - 8.5, \qquad E_{\text{NH}_3} = -38.84\,W - 7.61",
                            symbols=[("E_{\\sigma\\text{-hole}}", "σ-hole depth (kJ/mol)"),
                                     ("E_{\\sigma^*}", "σ*(C–I) orbital energy (kJ/mol)"),
                                     ("a,\\;b", "3.513×10⁻³ and −8.962×10⁻⁴ (per kJ/mol)"),
@@ -204,7 +204,7 @@ STAGES_B = [
                  "- **double exponential**: two exponentials with global α, β; used by Horton et al. in an OpenFF-style "
                  "force field (α ≈ 16.77, β ≈ 4.43 after refitting) {{horton-de}};\n"
                  "- **Tang–Toennies**: Born–Mayer repulsion plus damped dispersion series {{tt-damp}}.",
-            formulas=[dict(tex=r"E_{\text{LJ}} = \varepsilon\left[\left(\tfrac{r_m}{r}\right)^{12} - 2\left(\tfrac{r_m}{r}\right)^{6}\right], \qquad E_{\text{DE}} = \varepsilon\left[\tfrac{\beta e^{\alpha}}{\alpha-\beta}e^{-\alpha r/r_m} - \tfrac{\alpha e^{\beta}}{\alpha-\beta}e^{-\beta r/r_m}\right]",
+            formulas=[dict(src=['lj-1924', 'horton-de'], tex=r"E_{\text{LJ}} = \varepsilon\left[\left(\tfrac{r_m}{r}\right)^{12} - 2\left(\tfrac{r_m}{r}\right)^{6}\right], \qquad E_{\text{DE}} = \varepsilon\left[\tfrac{\beta e^{\alpha}}{\alpha-\beta}e^{-\alpha r/r_m} - \tfrac{\alpha e^{\beta}}{\alpha-\beta}e^{-\beta r/r_m}\right]",
                            symbols=[("\\varepsilon", "well depth (kcal/mol)"),
                                     ("r_m", "position of the minimum (Å)"),
                                     ("\\alpha,\\;\\beta", "dimensionless steepness of repulsion and attraction (double exponential)")])],
@@ -239,7 +239,7 @@ STAGES_B = [
                  "- **Polarisation**: induced dipoles with Thole damping {{thole}} let the σ-hole respond to the partner.\n"
                  "- **Charge penetration**: point multipoles miss the extra attraction when densities overlap {{wang-cp}}; "
                  "damped-charge models add it {{rackers-cp}}.",
-            formulas=[dict(tex=r"E_{\text{elst}}(\theta) = 332.06\,q_A\left[\frac{q_X - q_V}{d} + \frac{q_V}{\lvert \mathbf d - \mathbf d_V\rvert}\right]",
+            formulas=[dict(src=['ibrahim-vs', 'kolar-vs'], tex=r"E_{\text{elst}}(\theta) = 332.06\,q_A\left[\frac{q_X - q_V}{d} + \frac{q_V}{\lvert \mathbf d - \mathbf d_V\rvert}\right]",
                            symbols=[("q_A", "charge of the anion (e), here −1"),
                                     ("q_X", "total charge of the halogen plus its site (e)"),
                                     ("q_V", "charge moved to the virtual site (e)"),
@@ -284,7 +284,7 @@ STAGES_B = [
                  "Sage refitted LJ to liquid densities and enthalpies of mixing {{boothroyd-sage}}.\n\n"
                  "Engines such as OpenMM accept custom functional forms, which makes non-standard halogen-bond terms "
                  "practical {{openmm8}}. A broad historical review: Dauber-Osguthorpe & Hagler {{dauber-review}}.",
-            formulas=[dict(tex=r"E = \sum_{\text{bonds}} k_b(b-b_0)^2 + \sum_{\text{angles}} k_\theta(\theta-\theta_0)^2 + \sum_{\text{torsions}} \sum_n k_n[1+\cos(n\phi-\delta_n)] + \sum_{i<j}\left[E_{\text{vdW}}(r_{ij}) + \frac{332.06\,q_iq_j}{r_{ij}}\right]",
+            formulas=[dict(src=['stone-amber-form', 'cornell-amber'], tex=r"E = \sum_{\text{bonds}} k_b(b-b_0)^2 + \sum_{\text{angles}} k_\theta(\theta-\theta_0)^2 + \sum_{\text{torsions}} \sum_n k_n[1+\cos(n\phi-\delta_n)] + \sum_{i<j}\left[E_{\text{vdW}}(r_{ij}) + \frac{332.06\,q_iq_j}{r_{ij}}\right]",
                            symbols=[("k_b,\\;b_0", "bond force constant and reference length"),
                                     ("k_\\theta,\\;\\theta_0", "angle force constant and reference angle"),
                                     ("k_n,\\;n,\\;\\delta_n", "torsion barrier, periodicity and phase"),
@@ -320,7 +320,7 @@ STAGES_B = [
                  "{{kolar-vs}} {{ibrahim-vs}}.\n\n"
                  "Tools like ForceBalance optimise many targets at once with explicit weights and regularisation "
                  "{{forcebalance}}. Weights decide which part of a curve is matched.",
-            formulas=[dict(tex=r"L(\boldsymbol\theta) = \frac{\sum_i w_i\,[E_{\text{FF}}(r_i;\boldsymbol\theta) - E_{\text{ref}}(r_i)]^2}{\sum_i w_i}, \qquad w_i = e^{-(E_{\text{ref},i} - E_{\min})/kT_w}",
+            formulas=[dict(src=['forcebalance', 'boothroyd-weights'], tex=r"L(\boldsymbol\theta) = \frac{\sum_i w_i\,[E_{\text{FF}}(r_i;\boldsymbol\theta) - E_{\text{ref}}(r_i)]^2}{\sum_i w_i}, \qquad w_i = e^{-(E_{\text{ref},i} - E_{\min})/kT_w}",
                            symbols=[("\\boldsymbol\\theta", "parameters being fitted (here ε and r_m of an LJ term)"),
                                     ("w_i", "weight of reference point i"),
                                     ("kT_w", "weighting temperature (kcal/mol): small = focus on the well, large = all points alike")])],
@@ -354,7 +354,7 @@ STAGES_B = [
                  "- **Validation**: hold out data; choose the training set to cover descriptor space (Kennard–Stone) "
                  "{{kennard-stone}}; estimate uncertainty by bootstrap resampling {{bootstrap}}.\n\n"
                  "Report errors as RMSE and mean |Δ| on held-out data, not as a signed mean that lets errors cancel.",
-            formulas=[dict(tex=r"\hat{\boldsymbol\beta}_{\text{ridge}} = \left(\mathbf X^{\top}\mathbf X + \lambda\mathbf I\right)^{-1}\mathbf X^{\top}\mathbf y",
+            formulas=[dict(src=['ridge'], tex=r"\hat{\boldsymbol\beta}_{\text{ridge}} = \left(\mathbf X^{\top}\mathbf X + \lambda\mathbf I\right)^{-1}\mathbf X^{\top}\mathbf y",
                            symbols=[("\\mathbf X", "centred descriptor matrix (one row per compound)"),
                                     ("\\mathbf y", "centred target values (e.g. binding energies)"),
                                     ("\\lambda", "penalty strength; λ = 0 is ordinary least squares")])],

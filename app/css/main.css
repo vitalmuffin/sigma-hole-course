@@ -194,3 +194,6 @@ dialog::backdrop { background: rgb(0 0 0 / 0.5); }
 a.text-button { text-decoration: none; color: var(--text); display: inline-flex; align-items: center; min-height: 44px; }
 a.text-button.primary { color: var(--panel); }
 section[id], li[id], h1 { scroll-margin-top: calc(var(--header-height) + 16px); }
+
+.formula-src { margin: 0.4rem 0 0; font-size: 0.9rem; color: var(--muted); }
+.formula-src .ev-mark { margin-left: 0.25rem; }

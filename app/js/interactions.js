@@ -283,7 +283,8 @@
           { points: ref.map(function (p) { return { x: p.r, y: p.e }; }), color: "--c2", dots: true, width: 0.01 },
           { points: range(2.9, 7, 300, function (r) { return M.lj(r, fit.eps, fit.rm); }), color: "--c1" }
         ];
-        P.line(canvas, { x: [2.9, 7], y: [-2.8, 6], xLabel: "distance r (Å)", yLabel: "energy (kcal/mol)", series: series,
+        var top = Math.max(6, Math.max.apply(null, ref.map(function (p) { return p.e; })) * 1.08);   // keep every reference dot in view
+        P.line(canvas, { x: [2.9, 7], y: [-2.8, top], xLabel: "distance r (Å)", yLabel: "energy (kcal/mol)", series: series,
           vlines: [{ x: 3.6, color: "--c2" }, { x: fit.rm, color: "--c1" }] });
         return {
           legend: [{ label: "reference points (Morse, ε 2.0, r_m 3.6 Å)", color: "--c2" }, { label: "fitted LJ 12-6", color: "--c1" }],

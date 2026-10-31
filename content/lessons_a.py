@@ -25,7 +25,7 @@ STAGES_A = [
                  "must be fitted to data from the levels above or to experiment.\n\n"
                  "Every stage asks the same three things: what does the method assume, what is it grounded in, and where does "
                  "it fail for halogen bonds?",
-            formulas=[dict(tex=r"\frac{t(N)}{t(N_0)} = \left(\frac{N}{N_0}\right)^{p}",
+            formulas=[dict(src=['stone-scaling'], tex=r"\frac{t(N)}{t(N_0)} = \left(\frac{N}{N_0}\right)^{p}",
                            symbols=[("t", "wall time of one energy evaluation"),
                                     ("N", "system size (e.g. number of basis functions or atoms)"),
                                     ("N_0", "reference size"),
@@ -63,7 +63,7 @@ STAGES_A = [
                  "density isosurface.\n\n"
                  "A minimal model already captures the effect: a net charge $q$ plus an axial quadrupole $\\Theta$ on X. "
                  "The quadrupole adds to the potential along the axis and subtracts from it in the belt.",
-            formulas=[dict(tex=r"V(\theta) = \frac{q}{r} + \frac{\Theta}{r^{3}}\,\frac{3\cos^{2}\theta - 1}{2}",
+            formulas=[dict(src=['buckingham-multipole', 'clark-sigmahole'], tex=r"V(\theta) = \frac{q}{r} + \frac{\Theta}{r^{3}}\,\frac{3\cos^{2}\theta - 1}{2}",
                            symbols=[("V(\\theta)", "ESP at distance r and angle θ from the R–X axis (shown in kcal/mol per unit charge)"),
                                     ("q", "net charge on X (e)"),
                                     ("\\Theta", "axial quadrupole moment of X (e·bohr²); positive = depleted pole"),
@@ -152,7 +152,7 @@ STAGES_A = [
                  "Two cautions apply when reading such statistics. First, angle histograms must be **cone-corrected**: "
                  "the solid angle near 180° is small, so even random contacts would rarely appear there {{mooibroek-cone}}. "
                  "Second, a crystal contact is the result of all packing forces at once, not of the halogen bond alone.",
-            formulas=[dict(tex=r"P_{\text{random}}(\theta)\,\mathrm{d}\theta \propto \sin\theta\,\mathrm{d}\theta",
+            formulas=[dict(src=['mooibroek-cone'], tex=r"P_{\text{random}}(\theta)\,\mathrm{d}\theta \propto \sin\theta\,\mathrm{d}\theta",
                            symbols=[("\\theta", "R–X···Y angle measured from the linear arrangement (0° = linear)"),
                                     ("P_{\\text{random}}", "probability density of a randomly oriented contact"),
                                     ("\\sin\\theta", "solid-angle factor: zero at linearity, maximal at 90°")])],
@@ -184,7 +184,7 @@ STAGES_A = [
                  "Symmetry-adapted perturbation theory (SAPT) computes such terms directly.\n\n"
                  "SAPT on halogen-bonded complexes shows two regimes: in weak complexes (1–6 kcal/mol) dispersion is "
                  "usually the largest attractive term; in strong ones electrostatics and induction dominate {{kolar-sapt}}.",
-            formulas=[dict(tex=r"E(r) = A\,e^{-br} \;-\; \frac{332.06\,q_{\text{eff}}}{r} \;-\; f_6(br)\,\frac{C_6}{r^{6}}",
+            formulas=[dict(src=['bornmayer', 'stone-longrange', 'tt-damp'], tex=r"E(r) = A\,e^{-br} \;-\; \frac{332.06\,q_{\text{eff}}}{r} \;-\; f_6(br)\,\frac{C_6}{r^{6}}",
                            symbols=[("E(r)", "interaction energy at separation r (kcal/mol)"),
                                     ("A,\\;b", "Born–Mayer exchange-repulsion prefactor (kcal/mol) and decay constant (Å⁻¹)"),
                                     ("q_{\\text{eff}}", "effective product of interacting charges (e²); stands for the σ-hole–base electrostatics"),
@@ -296,7 +296,7 @@ STAGES_A = [
                  "therefore quote 'CCSD(T)/CBS' {{rezac-x40}} {{kriz-sh250}}. Kozuch and Martin found that only heavily "
                  "correlated methods (CCSD(T)) or parametrised MP2 variants reach high accuracy, and that heavy basis "
                  "sets and relativistic ECPs are needed {{kozuch-disp}}.",
-            formulas=[dict(tex=r"|\Psi_{\text{CC}}\rangle = e^{\hat T_1 + \hat T_2}\,|\Phi_{\text{HF}}\rangle,\qquad E_{\text{CCSD(T)}} = E_{\text{CCSD}} + E_{(T)}",
+            formulas=[dict(src=['kolar-ccsdt'], tex=r"|\Psi_{\text{CC}}\rangle = e^{\hat T_1 + \hat T_2}\,|\Phi_{\text{HF}}\rangle,\qquad E_{\text{CCSD(T)}} = E_{\text{CCSD}} + E_{(T)}",
                            symbols=[("\\hat T_1,\\;\\hat T_2", "single and double excitation operators with amplitudes solved iteratively"),
                                     ("\\Phi_{\\text{HF}}", "Hartree–Fock reference determinant"),
                                     ("E_{(T)}", "perturbative estimate of connected triple excitations")])],
@@ -331,11 +331,11 @@ STAGES_A = [
                  "{{boys-cp}}. For DFT, CP-corrected energies are less sensitive to diffuse functions and CP does not "
                  "over-correct {{gray-cp}}; for intermediate basis sets the average of CP and non-CP ('half-half') can "
                  "work best {{brauer-halfcp}}.",
-            formulas=[dict(tex=r"E_{\text{CBS}} = \frac{Y^{3}E_{Y} - X^{3}E_{X}}{Y^{3} - X^{3}}",
+            formulas=[dict(src=['kolar-cbs'], tex=r"E_{\text{CBS}} = \frac{Y^{3}E_{Y} - X^{3}E_{X}}{Y^{3} - X^{3}}",
                            symbols=[("X,\\;Y", "cardinal numbers of the two basis sets (e.g. 3 = TZ, 4 = QZ)"),
                                     ("E_X,\\;E_Y", "correlation (or interaction) energies in those basis sets (kcal/mol)"),
                                     ("E_{\\text{CBS}}", "extrapolated complete-basis-set value")]),
-                      dict(tex=r"\Delta E^{\text{CP}} = E_{AB}^{AB} - E_{A}^{AB} - E_{B}^{AB}",
+                      dict(src=['boys-cp'], tex=r"\Delta E^{\text{CP}} = E_{AB}^{AB} - E_{A}^{AB} - E_{B}^{AB}",
                            symbols=[("E_{M}^{AB}", "energy of fragment M computed in the full dimer basis AB")])],
             model="cbs",
             model_text="The model assumes both the non-CP and the CP interaction energies converge as $X^{-3}$, non-CP from "
@@ -373,7 +373,7 @@ STAGES_A = [
                  "Know what a benchmark reports. **Interaction energy** $E_{\\text{int}}$ uses monomers frozen at the "
                  "complex geometry; **binding energy** $E_{\\text{bind}}$ uses relaxed monomers and so includes deformation. "
                  "Dissociation curves ('×10') test the shape away from the minimum, which matters for force fields.",
-            formulas=[dict(tex=r"E_{\text{bind}} = E_{\text{int}} + \sum_{M} \left(E_{M}^{\text{complex geom}} - E_{M}^{\text{opt}}\right)",
+            formulas=[dict(src=['stone-deformation'], tex=r"E_{\text{bind}} = E_{\text{int}} + \sum_{M} \left(E_{M}^{\text{complex geom}} - E_{M}^{\text{opt}}\right)",
                            symbols=[("E_{\\text{int}}", "interaction energy with monomers in the complex geometry"),
                                     ("E_{M}^{\\text{complex geom}} - E_{M}^{\\text{opt}}", "deformation energy of monomer M (≥ 0)")])],
             model=None, model_text="",

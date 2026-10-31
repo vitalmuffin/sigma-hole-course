@@ -105,7 +105,7 @@
     blocks(panel, text, ctx);
     return panel;
   }
-  function formulaPanel(lesson) {
+  function formulaPanel(lesson, ctx) {
     var panel = make("section", { className: "panel" });
     panel.appendChild(make("span", { className: "step-label", text: "Formal statement" }));
     panel.appendChild(make("h2", { text: "The relation" }));
@@ -117,6 +117,9 @@
         var dd = make("dd"); inline(dd, s[1], { evOrder: [], evIndex: {} }); dl.appendChild(dd);
       });
       panel.appendChild(dl);
+      var src = make("p", { className: "formula-src", text: "Source: " });
+      fm.src.forEach(function (id) { src.appendChild(evidenceMark(id, ctx)); });
+      panel.appendChild(src);
     });
     return panel;
   }
@@ -276,7 +279,7 @@
     body.appendChild(textPanel("1 · Starting picture", "What we usually assume", lesson.prior, ctx));
     body.appendChild(textPanel("2 · Where it breaks", "The observation that does not fit", lesson.boundary, ctx));
     body.appendChild(textPanel("3 · New idea", "What changes", lesson.idea, ctx));
-    if (lesson.formulas && lesson.formulas.length) { body.appendChild(formulaPanel(lesson)); }
+    if (lesson.formulas && lesson.formulas.length) { body.appendChild(formulaPanel(lesson, ctx)); }
     if (lesson.model) { body.appendChild(modelPanel(lesson, ctx)); }
     if (lesson.limits && lesson.limits.length) { body.appendChild(listPanel("Limiting cases", "Where the relation reduces or stops", lesson.limits, ctx, "limits")); }
     if (lesson.deeper && lesson.deeper.length) { body.appendChild(deeperPanel(lesson, ctx)); }
