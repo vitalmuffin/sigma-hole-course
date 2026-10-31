@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.translation_cache/
+releases/*.tmp
+.DS_Store
+# copyrighted originals and their full-text transcriptions stay local
+sources/raw
+sources/raw_extra
+sources/processed/
+.claude/

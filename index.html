@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>The σ-Hole and Its Models</title>
+  <link rel="stylesheet" href="./app/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="./data/course-data.js"></script>
+  <script defer src="./app/js/state.js"></script>
+  <script defer src="./app/js/math.js"></script>
+  <script defer src="./app/js/models.js"></script>
+  <script defer src="./app/js/plot.js"></script>
+  <script defer src="./app/js/interactions.js"></script>
+  <script defer src="./app/js/ui.js"></script>
+  <script defer src="./app/js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#course-content">Skip to lesson</a>
+  <header class="topbar">
+    <button id="menu-button" class="icon-button" type="button" aria-controls="course-nav" aria-expanded="false" aria-label="Open course navigation">☰</button>
+    <div class="title-group">
+      <strong id="course-title">The σ-Hole and Its Models</strong>
+      <span id="stage-title" class="muted"></span>
+    </div>
+    <div class="topbar-actions">
+      <button id="theme-button" class="text-button" type="button" aria-label="Toggle light and dark appearance">Theme</button>
+      <button id="progress-button" class="text-button" type="button">Progress</button>
+    </div>
+  </header>
+
+  <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+  <nav id="course-nav" class="drawer" aria-label="Course path">
+    <div class="drawer-header">
+      <strong>Course path</strong>
+      <button id="close-menu-button" class="icon-button drawer-close" type="button" aria-label="Close course navigation">×</button>
+    </div>
+    <ol id="stage-list" class="stage-list"></ol>
+  </nav>
+
+  <main id="course-content" tabindex="-1">
+    <article id="lesson-view" aria-live="polite"></article>
+  </main>
+
+  <dialog id="progress-dialog" aria-labelledby="progress-title">
+    <div class="dialog-header">
+      <h2 id="progress-title">Progress</h2>
+      <button class="icon-button" type="button" data-close-dialog="progress-dialog" aria-label="Close progress">×</button>
+    </div>
+    <div id="progress-content"></div>
+  </dialog>
+
+  <dialog id="quiz-dialog" aria-labelledby="quiz-title">
+    <div class="dialog-header">
+      <h2 id="quiz-title">Check</h2>
+      <button class="icon-button" type="button" data-close-dialog="quiz-dialog" aria-label="Close check">×</button>
+    </div>
+    <div id="quiz-content"></div>
+  </dialog>
+
+  <noscript>This course needs JavaScript for its navigation and interactive models.</noscript>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "id": "the-hole-and-its-models",
+  "title": "The σ-Hole and Its Models",
+  "topic": "Halogen bonding: σ-hole, CCSD(T), DFT, force fields and their parametrisation",
+  "audience": "chemistry master student with basic QM",
+  "languages": [
+    "en"
+  ],
+  "default_language": "en",
+  "mode": "hybrid",
+  "created_at": "2026-10-31T16:55:39+00:00",
+  "deployment": {
+    "mode": "github-pages",
+    "base_path": "./",
+    "supports_file_scheme": true
+  },
+  "budgets": {
+    "max_html_bytes": 750000,
+    "max_inline_script_bytes": 200000,
+    "max_initial_asset_bytes": 1500000
+  }
+}
